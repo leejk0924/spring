@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <form name="input" id="modelForm" action="ModelAttribute" method="post">
+        <p>@ModelAttribute test</p>
+        <input type="text" name="test1">
+        <input type="text" name="test2">
+        <input type="text" name="test3">
+        <input type="submit" value="제출">
+        <input type="reset" value="초기화">
+        <input type="button"  value="ajax 전송" id="ajax1">
+    </form>
+
+
+    <form name="input" id="requestForm" action="RequestBody" method="post">
+        <p>@RequestBody test</p>
+        <input type="text" name="test1">
+        <input type="text" name="test2">
+        <input type="text" name="test3">
+        <input type="submit" value="제출">
+        <input type="reset" value="초기화">
+        <input type="button"  value="ajax 전송" id="ajax2">
+    </form>
+    <script type="text/javascript">
+
+        document.querySelector("#ajax1").addEventListener("click", function (){
+            debugger;
+            const a = new FormData($('#modelForm')[0]);
+            $.ajax({
+                url: "/ModelAttribute",
+                data: a,
+                method: "POST",
+                dataType: "json"
+            })
+        });
+
+        document.querySelector("#ajax2").addEventListener("click", function (){
+            const a = new FormData($('#requestForm')[0]);
+            $.ajax({
+
+                url: "RequestBody",
+                data: a,
+                method: "POST",
+                dataType: "json"
+            })
+        });
+    </script>
+</body>
+</html>
